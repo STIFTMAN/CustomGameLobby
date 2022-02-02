@@ -27,9 +27,9 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <p>Note: The whole gamefile has to be a <code>.txt</code> file in <code>JSON</code>.</p>
 <h3>Settings</h3>
 <h4>Type-Mode:<h4>
-<p><li><code>deathmatch</code>: all modes available</li>
+<li><code>deathmatch</code>: all modes available</li>
 <li><code>points</code>: <code>single</code> or <code>teams</code></li>
-<li><code>path</code>: only <code>oneforall</code></li></p>
+<li><code>path</code>: only <code>oneforall</code></li>
 <h4>Game Name</h4>
 <p><code>gameName</code>: Your Name for this game / story</p>
 <h3>Section</h3>
