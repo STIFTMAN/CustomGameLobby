@@ -68,7 +68,7 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 				{"t": "No",   "jmp": -1},
 				{"t": "Maybe","jmp": -1},
 				{"t": "42",   "jmp": -1},
-        {"t": "Yes",  "jmp": 0}
+        			{"t": "Yes",  "jmp": 0}
 			]
 	}
 ]</pre>
