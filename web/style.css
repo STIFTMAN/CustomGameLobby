@@ -1,0 +1,290 @@
+html{
+	font-size: clamp(0.5rem,1vw,1rem);
+	transition: all 300ms ease-in-out;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+body{
+	margin:0;
+	padding: 0;
+	font-family: 'Montserrat';
+}
+#join{
+	margin:5em 30%;
+	text-align:center;
+}
+
+#join h1{
+	margin: 0;
+	font-size: 2em;
+}
+
+#join h2{
+	margin: 0;
+	font-size: 1.5em;
+}
+
+#join input{
+	width:100%;
+	border-top:none;
+	border-left: none;
+	border-right: none;
+	outline: none;
+	font-size: 1.2em;
+	margin: 1em 0;
+	text-align:center;
+	height: 2em;
+	background-color:#eee;
+	border-radius: 3px 3px 0 0;
+}
+
+#join input:focus{
+	border-color: orange;
+}
+
+#join .buttonleft{
+	float: left;
+}
+
+#join .buttonright{
+	float: right;
+}
+#join button{
+	border:none;
+	outline:none;
+	font-size:1em;
+	padding: 0.5em 1em;
+	border-radius: 3px;
+	cursor: pointer;
+	background-color:#ddd;
+	font-family: 'Montserrat';
+}
+#join button:hover{
+	background-color:#bbb;
+	color:white;
+}
+
+#waiting{
+	text-align:center;
+	padding: 5em;
+	margin: auto;
+    width: fit-content;
+	height: -webkit-fill-available;
+}
+
+#waiting h1{
+	border-bottom-style: double;
+}
+
+#waitingButtons button{
+	border:none;
+	outline:none;
+	font-size:0.75em;
+	padding: 0.5em 1em;
+	border-radius: 3px;
+	cursor: pointer;
+	background-color:#ddd;
+	font-family: 'Montserrat';
+	margin-right: 0.5em;
+}
+#waitingButtons button:hover{
+	background-color:#bbb;
+	color:white;
+}
+
+#waitingPlayers{
+	font-weight:bolder;
+	list-style-type: none;
+	font-size:2em;
+	padding: 0;
+	width: fit-content;
+    margin: auto;
+}
+#waitingButtons{
+	border-radius: 3px;
+    margin: auto;
+    width: fit-content;
+}
+#waitingButtons em{
+	margin: 0 0.5em;
+	font-style: normal;
+}
+
+#settingsButtons{
+	font-size:1.5em;
+	bottom:0;
+	border-radius: 3px;
+	width: fit-content;
+    margin: 2em auto;
+}
+#settingsButtons button{
+	border:none;
+	outline:none;
+	font-size:0.75em;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	background-color:#ddd;
+	font-family: 'Montserrat';
+	border-radius:3px;
+}
+#settingsButtons button:hover{
+	background-color:#bbb;
+	color:white;
+}
+
+#settingsButtons .buttonleft{
+	margin-right: 3em;
+}
+
+#chat{
+	width: 20%;
+    float: right;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+	z-index: 0;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+#inputChat{
+	width: 100%;
+    border: none;
+    padding: 0;
+    height: 2em;
+	font-size: 1em;
+    background-color: #ddd;
+    outline: none;
+    bottom: 0;
+    position: absolute;
+}
+
+#chat #output{
+	width: 100%;
+    height: -webkit-fill-available;
+    padding: 0 0 2em 0;
+    margin: 0 0 0 0.5em;
+	list-style-type:none;
+	overflow-y: scroll;
+	font-size: 1.25em;
+}
+
+#settingsDIV{
+	z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+	text-align: center;
+}
+
+#settingsDIV #settingsList{
+	padding: 0;
+    list-style-type: none;
+    margin: 0 30%;
+	font-size: 1.5em;
+	text-align: left;
+}
+
+#settingsDIV #settingsList li{
+	border-bottom: 1px solid #CCC;
+}
+#settingsDIV #settingsList .right{
+	position: absolute;
+    right: 30%;
+}
+
+#settingsButtons{
+	font-size:1.5em;
+	bottom:0;
+	border-radius: 3px;
+	width: fit-content;
+    margin: 2em auto;
+}
+#settingsButtons button{
+	border:none;
+	outline:none;
+	font-size:0.75em;
+	padding: 0.5em 1em;
+	cursor: pointer;
+	background-color:#ddd;
+	font-family: 'Montserrat';
+	border-radius:3px;
+}
+#settingsButtons button:hover{
+	background-color:#bbb;
+	color:white;
+}
+
+#uploadcontainer{
+	width: 75%;
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #CCC;
+    margin: 1em auto 1em auto;
+    border: 1px black dashed;
+    padding: 0;
+    text-align: center;
+}
+
+#uploadcontainer legend{
+	font-weight: bold;
+}
+
+.player{
+	color:white;
+}
+
+#headertable{
+	width: 100%;
+    padding: 1em;
+    z-index: 5;
+}
+
+.player{
+	border-radius: 5px;
+	padding: 1em;
+	text-align: center;
+	
+}
+#q{
+	width: 80%;
+    background-color: lightblue;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 3em 0;
+	border-radius: 0 5px 5px 0;
+}
+#a{
+    list-style-type: none;
+    font-size: 1.5em;
+    width: 80%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0;
+}
+
+#a li{
+	margin: 1em;
+    background-color: darkseagreen;
+    border-radius: 5px;
+    padding: 2em;
+    float: left;
+}
+#a li:hover{
+	cursor:pointer;
+}

@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<div id='join'>
+			<h1>Custom Game Hosting</h1>
+			<h4><small>by STIFTMAN GAMING</small></h4>
+			<h2>Name</h2>
+			<input id='input2' minlength="3" maxlength="10" type='text'>
+			<h2>Lobby-ID</h2>
+			<input id='input1' type='text' minlength="6" maxlength="6">
+			<button class='buttonleft' onclick='startjoin(true)'>Join lobby</button><button class='buttonright' onclick='startjoin(false)'>Create lobby</button>
+		</div>
+		<script language="javascript" type="text/javascript" src="client.js"></script>
+		<script language="javascript" type="text/javascript" src="join.js"></script>
+	</body>
+</html>
