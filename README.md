@@ -76,5 +76,5 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <p>Multiple choise. When the game is finished, it tells you if you won or lost.</p>
 
 <h2>Notes</h2>
-<p>Settings can be left. One Section have to be there to play. There have to be only correct answer, exept you play path.</p>
+<p>One Section have to be there to play. There have to be only correct answer, exept you play path.</p>
   <p>IMPORTANT: <code>-1</code> at jmp means <code>lose</code> and <code>0</code> means <code>win</code></p>
