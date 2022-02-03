@@ -14,9 +14,9 @@ Your ip adress will be used to connect to the server. The stanard port for conne
 type <code>localhost:5000</code>, if its running on the same device or <code>your ipv4:5000</code>, if you reach it from somewhere.</p>
   
 <h2>Game types</h2>
-<p><li><code>deathmatch</code>: A knockout Battle</li>
-<li><code>points</code>: Win with most points</li>
-<li><code>path</code>: Knockout, but possible to jump back to earlier questions and do them again. Its possible to create stories like <code>Black Mirror: Bandersnatch</code></li></p>
+<p><li><code>deathmatch</code>: A knockout Battle <em>(only 1 right answer)</em></li>
+<li><code>points</code>: Win with most points <em>(only 1 right answer)</em></li>
+<li><code>path</code>: Knockout, but possible to jump back to earlier questions and do them again <em>(multiple right answers)</em>. Its possible to create stories like <code>Black Mirror: Bandersnatch</code></li></p>
 
 <h2>Game modes</h2>
 <p><li><code>single</code>: Play alone against others</li>
@@ -26,7 +26,8 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <h2>Game file</h2>
 <p>Note: The whole gamefile has to be a <code>.txt</code> file in <code>JSON</code>.</p>
 <h3>Settings</h3>
-<h4>Type-Mode:<h4>
+<p>The settings object have to be on top of the file with an id of <code>settings</code>.</p>
+<h4>Type-Mode:</h4>
 <li><code>deathmatch</code>: all modes available</li>
 <li><code>points</code>: <code>single</code> or <code>teams</code></li>
 <li><code>path</code>: only <code>oneforall</code></li>
@@ -73,8 +74,8 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 	}
 ]</pre>
 <h2>Playing</h2>
-<p>Multiple choise. When the game is finished, it tells you if you won or lost.</p>
+<p>Multiple choise. When the game is finished, it tells you if you won or lost. The questions will NOT be shuffled, because it follows the <code>jmp</code> id. Max. 8 Players</p>
 
 <h2>Notes</h2>
 <p>One Section have to be there to play. There have to be only correct answer, exept you play path. If you want to play alone, choose 'oneforall', else it needs 2 players to start.</p>
-  <p>IMPORTANT: <code>-1</code> at jmp means <code>lose</code> and <code>0</code> means <code>win</code></p>
+  <p>IMPORTANT: <code>-1</code> at jmp means <code>lose</code> and <code>0</code> means <code>win</code>. <code>-1</code> will be ignored, if <code>points</code> is set.</p>
