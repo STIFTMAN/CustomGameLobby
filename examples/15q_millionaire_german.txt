@@ -1,0 +1,173 @@
+[
+	{
+		"id": "settings",
+		"gameName": "Wer wird Millionär 15 Fragen",
+		"type": "points",
+		"mode": "single"
+	},
+	{
+		"id": 1,
+		"q": "Vervollständigen Sie den Satz: 'Von allen Seiten betrachtet – oder auch: Wie man es ...?'",
+		"a":
+			[	
+				{"t": "startet und gibt Gas",			"jmp": -1},
+				{"t": "biegt ab und verfährt sich",		"jmp": -1},
+				{"t": "hält an und fragt Passanten",	"jmp": -1},
+				{"t": "dreht und wendet",				"jmp": 2}
+			]
+	},
+	{
+		"id": 2,
+		"q": "Beschäftigt der fünfmalige Tour-de-France-Sieger Hinault entsprechende Hausangestellte, dann arbeiten bei ... ?",
+		"a":
+			[
+				{"t": "Focks Tärrier",	"jmp": -1},
+				{"t": "Dallma Tiener",	"jmp": -1},
+				{"t": "Re Pinnscher",	"jmp": -1},
+				{"t": "Bernard Diener",	"jmp": 3}
+			]
+	},
+	{
+		"id": 3,
+		"q": "Lässt man sich auf eine Beziehung mit einer Schönheitskönigin ein, hat man sozusagen ...?",
+		"a":
+			[
+				{"t": "ein Ungleich-Gewicht",	"jmp": -1},
+				{"t": "ein Über-Maß",			"jmp": -1},
+				{"t": "ein Miss-Verhältnis",	"jmp": 4},
+				{"t": "eine Schief-Lage",		"jmp": -1}
+			]
+	},
+	{
+		"id": 4,
+		"q": "Gesundheitsbewusste Strandurlauber sind auch beim ... ?",
+		"a":
+			[
+				{"t": "Nünftig vernünftig",	"jmp": -1},
+				{"t": "Sonnen besonnen",	"jmp": 5},
+				{"t": "Sichtig umsichtig",	"jmp": -1},
+				{"t": "Sam achtsam",		"jmp": -1}
+			]
+	},
+	{
+		"id": 5,
+		"q": "Wer einen Kellner sucht, findet ihn buchstäblich im ... ?",
+		"a":
+			[
+				{"t": "September",	"jmp": -1},
+				{"t": "Oktober",	"jmp": 6},
+				{"t": "November",	"jmp": -1},
+				{"t": "Dezember",	"jmp": -1}
+			]
+	},
+	{
+		"id": 6,
+		"q": "In welcher Sendung kamen unter anderem Jeanette Biedermann, Mark Forster und Lena Meyer-Landrut ins Tauschgeschäft?",
+		"a":
+			[
+				{"t": "Sing meinen Song",		"jmp": 7},
+				{"t": "Koch mein Leibgericht",	"jmp": -1},
+				{"t": "Verführ meine Frau",		"jmp": -1},
+				{"t": "Bewohn mein Haus",		"jmp": -1}
+			]
+	},
+	{
+		"id": 7,
+		"q": "Was so mancher selbst im nüchternen Zustand nicht hinbekommt: Korrekt schreibt sich der beliebte Cocktail ... ?",
+		"a":
+			[
+				{"t": "Caipirnja",	"jmp": -1},
+				{"t": "Cajpirinha",	"jmp": -1},
+				{"t": "Caipirinha",	"jmp": 8},
+				{"t": "Cajpiriña",	"jmp": -1}
+			]
+	},
+	{
+		"id": 8,
+		"q": "Wobei wird vor einem sogenannten Rebound-Effekt gewarnt, der nicht selten zu einer Abhängigkeit führt?",
+		"a":
+			[
+				{"t": "Haarspray",		"jmp": -1},
+				{"t": "Nasenspray",		"jmp": 9},
+				{"t": "Deospray",		"jmp": -1},
+				{"t": "Pfefferspray",	"jmp": -1}
+			]
+	},
+	{
+		"id": 9,
+		"q": "Die Darstellung welcher Figur wurde schon zweimal mit einem Schauspiel-Oscar prämiert?",
+		"a":
+			[
+				{"t": "Dr. Hannibal Lecter","jmp": -1},
+				{"t": "Forrest Gump",		"jmp": -1},
+				{"t": "Joker",				"jmp": 10},
+				{"t": "Truman Capote",		"jmp": -1}
+			]
+	},
+	{
+		"id": 10,
+		"q": "Alfred Gislason ist seit Februar 2020 bereits der zweite Isländer im Amt des deutschen Männer-Nationaltrainers im ... ?",
+		"a":
+			[
+				{"t": "Basketball",	"jmp": -1},
+				{"t": "Volleyball",	"jmp": -1},
+				{"t": "Handball",	"jmp": 11},
+				{"t": "Tennis",		"jmp": -1}
+			]
+	},
+	{
+		"id": 11,
+		"q": "Wo befinden sich einige der höchsten Alpengipfel?",
+		"a":
+			[
+				{"t": "Monte-Rosa-Massiv",		"jmp": 12},
+				{"t": "Monte-Purpur-Höhenzug",	"jmp": -1},
+				{"t": "Monte-Lila-Gebirge",		"jmp": -1},
+				{"t": "Monte-Magenta-Kette",	"jmp": -1}
+			]
+	},
+	{
+		"id": 12,
+		"q": "Wo wurde der Schriftsteller geboren, der für den Roman “Herkunft” 2019 mit dem Deutschen Buchpreis ausgezeichnet wurde?",
+		"a":
+			[
+				{"t": "Rhodesien",	"jmp": -1},
+				{"t": "Jugoslawien","jmp": 13},
+				{"t": "Ceylon",		"jmp": -1},
+				{"t": "Tibet",		"jmp": -1}
+			]
+	},
+	{
+		"id": 13,
+		"q": "Was war hierzulande bis in die 1950er noch gang und gäbe?",
+		"a":
+			[
+				{"t": "Beamtinnenkommunion",		"jmp": -1},
+				{"t": "Krankenschwesternkollekte",	"jmp": -1},
+				{"t": "Lehrerinnenzölibat"	,		"jmp": 14},
+				{"t": "Sekretärinnenbeichte",		"jmp": -1}
+			]
+	},
+	{
+		"id": 14,
+		"q": "Das naturgegebene Schicksal welcher Pflanze sieht vor, dass die Blüte bei den meisten Arten unweigerlich zum Tod führt?",
+		"a":
+			[
+				{"t": "Bambus",			"jmp": 15},
+				{"t": "Ginkgo",			"jmp": -1},
+				{"t": "Rhododendron",	"jmp": -1},
+				{"t": "Eukalyptus",		"jmp": -1}
+			]
+	},
+	{
+		"id": 15,
+		"q": "Die klassische, genormte Europalette EPAL 1 besteht aus 78 Nägeln, neun Klötzen und insgesamt wie vielen Brettern? Die klassische, genormte Europalette EPAL 1 besteht aus 78 Nägeln, neun Klötzen und insgesamt wie vielen Brettern?",
+		"a":
+			[
+				{"t": "neun",	"jmp": -1},
+				{"t": "zehn",	"jmp": -1},
+				{"t": "elf",	"jmp": 0},
+				{"t": "zwölf",	"jmp": -1}
+			]
+	}
+]
