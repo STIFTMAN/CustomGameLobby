@@ -87,55 +87,34 @@ class Game{
 			var random = Math.floor(Math.random() * (list.length-1));
 			temp = this.getSectionById(list[random]);
 			if(temp != -1){
-				this.oldcurr = this.curr;
 				this.curr = list[random];
-				return all; // Return of this Section Winner
+				return all;
 			}
 			else{
-				if(list[random] == 0){
-					this.status = "end"; 
-					return all; // Return Winner
+				this.status = "end"; 
+				if(list[random] == 0){ 
+					return all;
 				}
 				else{
-					this.status = "end"; 
-					return []; // Return Loser
+					return [];
 				}	
 			}
 		}
 		else if(this.settings.mode == "single" || this.settings.mode == "team"){
 			var winners = [];
-			var temp = 0;
+			var temp = this.curr + 1;
 			for(var i in this.allVotes){
-				if(i != "-1"){
+				if(parseInt(i) != -1){
 					for(var n = 0; n < this.allVotes[i].length; n++){
 						winners.push(this.allVotes[i][n]);
 					}
-					temp = i;
 				}
 			}
 			if(this.getSectionById(temp) != -1){
-				this.oldcurr = this.curr;
 				this.curr = temp;
 			}
 			else{
-				if(temp == -1 || temp == 0){
-					this.status = "end";
-				}
-				else{
-					var nextCurr = -1;
-					var temp2 = this.getSectionById(this.curr);
-					for(var i = 0; i < this.sections[temp2].answers.length; i++){
-						if(this.sections[temp2].answers[i].jmp >= 0){
-							nextCurr = this.sections[temp2].answers[i].jmp;
-						}
-					}
-					if(nextCurr == 0 || nextCurr == -1){
-						this.status = "end";
-					}
-					this.oldcurr = this.curr;
-					this.curr = nextCurr;
-					
-				}
+				this.status = "end";
 			}
 			return winners;
 		}
@@ -190,217 +169,213 @@ class Lobby{
 	getAnswer(socket, id){
 		if(this.status == "running"){
 			var spec = false;
-			for(var i = 0; i < this.players.length; i++){
-				if(this.players[i].type == "spectator" && this.players[i].id == socket.id){
-					spec = true;
-				}
-			}
-			if(!spec){
-				if(this.game.getAnswer(socket, id)){
-					var t = this.returnPlayerIndex(socket.id);
-					if(t != -1){
+			var t = this.returnPlayerIndex(socket.id);
+			if(t != -1){
+				if(this.players[t].type == "player"){
+					if(this.game.getAnswer(socket, id)){
 						this.players[t].answered = true;
-					}
-					this.updateAllPlayers();
-					if(this.revealAnswers()){
-						this.sendAll("revealAnswers");
-						var winner = this.game.nextSection();
-						this.game.allVotes = {};
-						this.game.voteAnz = 0;
-						if(this.settings.mode == "oneforall"){
-							if(this.game.status == "end"  || winner.length == 0){ // Komplettes Ende
-								this.sendAll("win", winner);
-								this.status = "end";
-							}
-							else{
-								for(var i = 0; i < this.players.length; i++){
-									this.players[i].answered = false;
-								}
-								this.updateAllPlayers();
-								this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
-							}
-						}
-						else if(this.settings.mode == "team"){
-							var teams = {};
-							var anzTeams = 0;
-							for(var i = 0; i < this.players.length; i++){
-								if(typeof teams[this.players[i].color] == "undefined" && this.players[i].type == "player"){
-									teams[this.players[i].color] = [];
-									anzTeams++;
-								}
-								if(Array.isArray(teams[this.players[i].color])){
-									teams[this.players[i].color].push(this.players[i].id);
-								}
-							}
-							if(anzTeams > 1){
-								if(this.settings.type == "points"){
-									this.addPoints(winner);
-									for(var i = 0; i < this.players.length; i++){
-										this.players[i].answered = false;
-									}
-									this.updateAllPlayers();
-									if(this.game.status == "end"){ // Komplettes Ende
-										var pointTeam = 0; // points / index in teams
-										var allTeams = [];
-										for(var i in teams){
-											var tempPoints = 0;
-											for(var n = 0; n < teams[i].length; n++){
-												var tempPlayer = this.returnPlayerIndex(teams[i][n]);
-												if(tempPlayer != -1){
-													tempPoints += this.players[tempPlayer].points;
-												}
-											}
-											if(tempPoints > pointTeam){
-												pointTeam = tempPoints;
-												allTeams = [i];
-											}
-											else if(tempPoints == pointTeam){
-												allTeams.push(i);
-											}
-										}
-										var allWinners = [];
-										for(var i = 0; i < allTeams.length; i++){
-											for(var n in teams){
-												if(n == allTeams[i]){
-													for(var s = 0; s < teams[n].length; s++){
-														allWinners.push(teams[n][s]);
-													}
-												}
-											}
-										}
-										console.log("End Game");
-										this.sendAll("win", allWinners);
-										this.status = "end";
-									}
-									else{
-										this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
-									}
-								}
-								else if(this.settings.type == "deathmatch"){
-									for(var i in teams){
-										var j = false;
-										for(var n = 0; n < teams[i].length; n++){
-											if(!j){
-												for(var p = 0; p < winner.length; p++){
-													if(teams[i][n] == winner[p]){
-														j = true;
-														break;
-													}
-												}
-											}
-											else{
-												break;
-											}
-										}
-										if(!j){
-											for(var n = 0; n < teams[i].length; n++){
-												for(var p = 0; p < this.players.length; p++){
-													if(this.players[p].id == teams[i][n]){
-														this.players[p].type = "spectator";
-													}
-												}
-											}
-											delete teams[i];
-											anzTeams--;
-										}
-									}
-									for(var i = 0; i < this.players.length; i++){
-										this.players[i].answered = false;
-									}
-									this.updateAllPlayers();
-									if(anzTeams <= 1){
-										this.game.status = "end";
-									}
-									if(this.game.status == "end"){ // Komplettes Ende
-										console.log("End Game");
-										var winnerTeams = [];
-										for(var i = 0; i < this.players.length; i++){
-											if(this.players[i].type == "player"){
-												winnerTeams.push(this.players[i].id);
-											}
-										}
-										this.sendAll("win", winnerTeams);
-										this.status = "end";
-									}
-									else{
-										this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
-									}
-								}
-							}
-							else{
-								var winnerTeams = [];
-								for(var i = 0; i < this.players.length; i++){
-									if(this.players[i].type == "player"){
-										winnerTeams.push(this.players[i].id);
-									}
-								}
-								this.sendAll("win", winnerTeams);
-								this.sendAll("msg", {id: 0, text: "One team remaining. Game over!"});
-								this.status = "end";
-							}
-						}
-						else if(this.settings.mode == "single"){
-							if(this.settings.type == "points"){
-								this.addPoints(winner);
-							}
-							else if(this.settings.type == "deathmatch"){
-								for(var i = 0; i < this.players.length; i++){
-									this.players[i].type = "spectator";
-								}
-								for(var n = 0; n < winner.length; n++){
-									var s = this.returnPlayerIndex(winner[n]);
-									if(s != -1){
-										this.players[s].type = "player";
-									}
-								}
-								if(winner.length == 0){
-									this.game.status = "end";
-								}
-							}
-							var anzPlayers = 0;
-							for(var i = 0; i < this.players.length; i++){
-								if(this.players[i].type == "player"){
-									anzPlayers++;
-								}
-							}
-							if(anzPlayers <= 1){
-								this.sendAll("msg", {id: 0, text: "One player remaining. Game over!"});
-								this.game.status = "end";
-							}
-							for(var i = 0; i < this.players.length; i++){
-								this.players[i].answered = false;
-							}
-							this.updateAllPlayers();
-							if(this.game.status == "end"){ // Komplettes Ende
-								this.status = "end";
-								console.log("End Game");
-								if(this.settings.type == "points"){
-									var tempPoints = 0;
-									var allWinners = [];
-									for(var i = 0; i < this.players.length; i++){
-										if(this.players[i].points > tempPoints){
-											allWinners = [this.players[i].id];
-											tempPoints = this.players[i].points;
-										}
-										else if(this.players[i].points == tempPoints){
-											allWinners.push(this.players[i].id);
-										}
-									}
-									this.sendAll("win", allWinners);
+						if(this.revealAnswers()){
+							var winner = this.game.nextSection();
+							this.game.allVotes = {};
+							this.game.voteAnz = 0;
+							if(this.settings.mode == "oneforall"){
+								if(this.game.status == "end"  || winner.length == 0){
+									this.sendAll("win", winner);
+									this.status = "end";
 								}
 								else{
-									this.sendAll("win", winner);
+									this.resetAnswers();
+									this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
 								}
 							}
-							else{
-								
-								this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
+							else if(this.settings.mode == "team"){
+								var teams = {};
+								var anzTeams = 0;
+								for(var m in teams){
+									anzTeams++;
+								}
+								if(anzTeams > 1){
+									if(this.settings.type == "points"){
+										this.addPoints(winner);
+										this.resetAnswers();
+										if(this.game.status == "end"){
+											var pointTeam = 0;
+											var allTeams = [];
+											for(var i in teams){
+												var tempPoints = 0;
+												for(var n = 0; n < teams[i].length; n++){
+													var tempPlayer = this.returnPlayerIndex(teams[i][n]);
+													if(tempPlayer != -1){
+														tempPoints += this.players[tempPlayer].points;
+													}
+												}
+												if(tempPoints > pointTeam){
+													pointTeam = tempPoints;
+													allTeams = [i];
+												}
+												else if(tempPoints == pointTeam){
+													allTeams.push(i);
+												}
+											}
+											var allWinners = [];
+											for(var i = 0; i < allTeams.length; i++){
+												for(var n in teams){
+													if(n == allTeams[i]){
+														for(var s = 0; s < teams[n].length; s++){
+															allWinners.push(teams[n][s]);
+														}
+													}
+												}
+											}
+											this.sendAll("win", allWinners);
+											this.status = "end";
+										}
+										else{
+											this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
+										}
+									}
+									else if(this.settings.type == "deathmatch"){
+										for(var i in teams){
+											var j = false;
+											for(var n = 0; n < teams[i].length; n++){
+												if(!j){
+													for(var p = 0; p < winner.length; p++){
+														if(teams[i][n] == winner[p]){
+															j = true;
+															break;
+														}
+													}
+												}
+												else{
+													break;
+												}
+											}
+											if(!j){
+												for(var n = 0; n < teams[i].length; n++){
+													for(var p = 0; p < this.players.length; p++){
+														if(this.players[p].id == teams[i][n]){
+															this.players[p].type = "spectator";
+														}
+													}
+												}
+												delete teams[i];
+												anzTeams--;
+											}
+										}
+										for(var i = 0; i < this.players.length; i++){
+											this.players[i].answered = false;
+										}
+										this.updateAllPlayers();
+										if(anzTeams <= 1){
+											this.game.status = "end";
+										}
+										if(this.game.status == "end"){ // Komplettes Ende
+											console.log("End Game");
+											var winnerTeams = [];
+											for(var i = 0; i < this.players.length; i++){
+												if(this.players[i].type == "player"){
+													winnerTeams.push(this.players[i].id);
+												}
+											}
+											this.sendAll("win", winnerTeams);
+											this.status = "end";
+										}
+										else{
+											this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
+										}
+									}
+								}
+								else{
+									this.status = "end";
+									var winnerTeams = [];
+									for(var i = 0; i < this.players.length; i++){
+										if(this.players[i].type == "player"){
+											winnerTeams.push(this.players[i].id);
+										}
+									}
+									this.sendAll("win", winnerTeams);
+									this.sendAll("msg", {id: 0, text: "One team remaining. Game over!"});
+								}
+							}
+							else if(this.settings.mode == "single"){
+								if(this.settings.type == "points"){
+									this.addPoints(winner);
+								}
+								else if(this.settings.type == "deathmatch"){
+									for(var i = 0; i < this.players.length; i++){
+										this.players[i].type = "spectator";
+									}
+									for(var n = 0; n < winner.length; n++){
+										var s = this.returnPlayerIndex(winner[n]);
+										if(s != -1){
+											this.players[s].type = "player";
+										}
+									}
+									if(winner.length == 0){
+										this.game.status = "end";
+									}
+								}
+								var anzPlayers = 0;
+								for(var i = 0; i < this.players.length; i++){
+									if(this.players[i].type == "player"){
+										anzPlayers++;
+									}
+								}
+								if(anzPlayers <= 1){
+									this.sendAll("msg", {id: 0, text: "One player remaining. Game over!"});
+									this.game.status = "end";
+								}
+								this.resetAnswers();
+								if(this.game.status == "end"){ // Komplettes Ende
+									this.status = "end";
+									if(this.settings.type == "points"){
+										var tempPoints = 0;
+										var allWinners = [];
+										for(var i = 0; i < this.players.length; i++){
+											if(this.players[i].points > tempPoints){
+												allWinners = [this.players[i].id];
+												tempPoints = this.players[i].points;
+											}
+											else if(this.players[i].points == tempPoints){
+												allWinners.push(this.players[i].id);
+											}
+										}
+										this.sendAll("win", allWinners);
+									}
+									else{
+										this.sendAll("win", winner);
+									}
+								}
+								else{	
+									this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
+								}
 							}
 						}
+					}
+					else{
+						this.updateAllPlayers();
 					}
 				}
 			}
 		}
+	}
+	resetAnswers(){
+		for(var i = 0; i < this.players.length; i++){
+			this.players[i].answered = false;
+		}
+		this.updateAllPlayers();
+	}
+	returnTeams(){
+		var teams = {};
+		for(var i = 0; i < this.players.length; i++){
+			if(typeof teams[this.players[i].color] == "undefined" && this.players[i].type == "player"){
+				teams[this.players[i].color] = [];
+			}
+			if(Array.isArray(teams[this.players[i].color])){
+				teams[this.players[i].color].push(this.players[i].id);
+			}
+		}
+		return teams;
 	}
 	returnPlayerIndex(id){
 		for(var i = 0; i < this.players.length; i++){
@@ -415,8 +390,7 @@ class Lobby{
 		for(var i = 0; i < this.players.length; i++){
 			tempArray.push(this.players[i].id);
 		}
-		var text = JSON.stringify(tempArray);
-		this.sendAll("updatePlayers", text);
+		this.sendAll("updatePlayers", tempArray);
 	}
 	addPoints(data){
 		for(var i = 0; i < data.length; i++){
@@ -486,14 +460,13 @@ class Lobby{
 		}
 		socket.leave(this.id);
 		this.removePlayer(socket.id);
-		console.log("Player left " + this.id);
 		this.sendAll("playerleft", socket.id);
+		console.log("Player joined " + this.id);
 		if(this.players.length > 0){
 			if(this.status == "lobby"){
 				if(socket.id == this.leader){
 					this.leader = this.players[0].id;
 					this.sendAll("newLeader", this.leader);
-					console.log("Lobby " + this.id + " new Leader");
 					this.sendAll("msg", {id: 0, text: this.players[0].name + " is the new leader."});
 				}
 			}
@@ -504,8 +477,7 @@ class Lobby{
 		for(var i = 0; i < this.players.length; i++){
 			tempArray.push(this.players[i].id);
 		}
-		var text = JSON.stringify(tempArray);
-		this.sendAll("waiting", text);
+		this.sendAll("waiting", tempArray);
 	}
 	join(socket, data){
 		if(this.status == "lobby"){
@@ -514,8 +486,8 @@ class Lobby{
 				this.nextColor(socket.id);
 				socket.emit("lobbyId", this.id);
 				socket.emit("newLeader", this.leader);
-				console.log("Player joined " + data.lobby);
 				socket.join(data.lobby);
+				console.log("Player joined " + this.id);
 				this.getWaitingPlayers();
 				this.sendAll("msg", {id: 0, text: data.name + " joined the lobby."});
 			}
@@ -545,7 +517,7 @@ class Lobby{
 				this.sendAll("nextQuestion", this.game.sections[this.game.getSectionById(this.game.curr)]);
 			}
 			else{
-				socket.emit("servermsg", "There is no game uploaded!. Open 'Game Settings' to upload a game.");
+				socket.emit("servermsg", "There is no game uploaded!. Open 'Game Settings' to upload a game.\nVisit https://github.com/STIFTMAN/CustomGameLobby for more information.");
 			}
 		}
 		else{
@@ -573,7 +545,7 @@ class Lobby{
 					}
 				}
 				else{
-					io.sockets.to(id).emit("servermsg", "File is not valid.");
+					io.sockets.to(id).emit("servermsg", "File is not valid.\nVisit https://github.com/STIFTMAN/CustomGameLobby for more information.");
 				}
 			}
 		}

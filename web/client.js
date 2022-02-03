@@ -251,19 +251,17 @@ socket.on("msg", function(data){
 socket.on("waiting", function(data){ // Spieler werden aktualisiert
 	document.getElementById("waitingPlayers").innerHTML = "";
 	players = [];
-	var obj = JSON.parse(data);
-	for(var x in obj){
-		if(obj.hasOwnProperty(x)){
-			socket.emit("getPlayerData",obj[x]);
+	for(var x in data){
+		if(data.hasOwnProperty(x)){
+			socket.emit("getPlayerData",data[x]);
 		}
 	}
 });
 
 socket.on("updatePlayers",function(data){
-	var obj = JSON.parse(data);
-	for(var x in obj){
-		if(obj.hasOwnProperty(x)){
-			socket.emit("getPlayerData",obj[x]);
+	for(var x in data){
+		if(data.hasOwnProperty(x)){
+			socket.emit("getPlayerData",data[x]);
 		}
 	}
 });
