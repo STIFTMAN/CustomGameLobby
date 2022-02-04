@@ -532,7 +532,7 @@ class Lobby{
 	getFile(id,data){
 		if(!this.uploadedValidFile){
 			if(id == this.leader){
-				var game = createGame(data.toString());
+				var game = createGame(data.toString(), this.id);
 				if(game != null){
 					this.game = game;
 					this.settings = this.game.settings;
@@ -552,20 +552,18 @@ class Lobby{
 	}
 }
 
-
-
-// FUNKTIONEN
-
-function createGame(file){
+function createGame(file, id){
 	var game = new Game();
 	var obj = null;
 	try{
 		obj = JSON.parse(file);
 	}
 	catch(e){
+		io.in(id).emit("msg", {id: 0, text: "GameFile: Invalid JSON"});
 		return null;
 	}
 	if(!Array.isArray(obj)){
+		io.in(id).emit("msg", {id: 0, text: "GameFile: Invalid JSON-input"});
 		return null;
 	}
 	var settings = new Settings;
@@ -574,63 +572,87 @@ function createGame(file){
 	if((temp = getIdFromArray(obj, "settings")) == 0){
 		settings = changeSettings(settings, obj[0]);
 		if(!(settings.type == "points" || settings.type == "deathmatch" || settings.type == "path")){
+			io.in(id).emit("msg", {id: 0, text: "GameFile - Settings: Invalid type"});
 			return null;
 		}
 		if(!(settings.mode == "oneforall" || settings.mode == "single" || settings.mode == "team")){
+			io.in(id).emit("msg", {id: 0, text: "GameFile - Settings: Invalid mode"});
 			return null;
 		}
 		if(settings.mode == "oneforall"){
 			if(!(settings.type == "path" || settings.type == "deathmatch")){
+				io.in(id).emit("msg", {id: 0, text: "GameFile - Settings: oneforall cannot be set with " + settings.type});
 				return null;
 			}
 		}
 		if(settings.mode == "single" || settings.mode == "team"){
 			if(settings.type == "path"){
+				io.in(id).emit("msg", {id: 0, text: "GameFile - Settings: path is only available with oneforall"});
 				return null;
 			}
 		}
 	}
-	game.settings = settings;
-	var n = 0;
-	if(temp == 0){
-		n = 1;
+	else{
+		io.in(id).emit("msg", {id: 0, text: "GameFile: No settings found"});
+		return null;
 	}
-	for(var i = n; i < obj.length; i++){
+	game.settings = settings;
+	for(var i = 1; i < obj.length; i++){
 		if(typeof obj[i].id == "number"){
 			game.sections.push(new Section(obj[i].id, obj[i].q, obj[i].a));
 		}
 		else{
+			io.in(id).emit("msg", {id: 0, text: "GameFile - Section: ID " + obj[i].id + " is not a number"});
 			return null;
 		}
 	}
 	if(game.sections.length == 0){
+		io.in(id).emit("msg", {id: 0, text: "GameFile: No Questions"});
 		return null;
 	}
-	return validGame(game);
+	return validGame(game, id);
 }
 
-function validGame(game){
+function validGame(game, id){
 	if(game.getSectionById(1) == -1){
+		io.in(id).emit("msg", {id: 0, text: "GameFile - Section: No starting ID"});
 		return null;
 	}
 	for(var i = 0; i < game.sections.length; i++){
-		if(typeof game.sections[i].id != "number" && typeof game.sections[i].question != "string" && Array.isArray(game.sections[i].answers)){
+		if(typeof game.sections[i].question != "string" && Array.isArray(game.sections[i].answers)){
+			io.in(id).emit("msg", {id: 0, text: "GameFile - Section: Type error at ID " + game.sections[i].id + ". Check the question and answer Array."});
 			return null;
 		}
 		if(game.sections[i].id != Math.round(game.sections[i].id)){
 			return null;
 		}
 		if(game.settings.type != "path"){
-			var temp = 0;
+			var temp = -1;
 			if(game.sections[i].answers.length <= 1){
+				io.in(id).emit("msg", {id: 0, text: "GameFile - Section: Only 1 Answer at " + game.sections[i].id});
 				return null;
 			}
 			for(var n = 0; n < game.sections[i].answers.length; n++){
-				if(typeof game.sections[i].answers[n].jmp != "number" && typeof game.sections[i].answers[n].txt != "string"){
+				if(typeof game.sections[i].answers[n].jmp != "number"){
+					io.in(id).emit("msg", {id: 0, text: "GameFile - Section: Type error at ID " + game.sections[i].id + ". Check your jmp adress in answers."});
+					return null;
+				}
+				if(typeof game.sections[i].answers[n].txt != "string"){
+					io.in(id).emit("msg", {id: 0, text: "GameFile - Section: Type error at ID " + game.sections[i].id + ". Check your text in answers."});
 					return null;
 				}
 				if(!(game.sections[i].answers[n].jmp == game.sections[i].id + 1 || game.sections[i].answers[n].jmp == 0 || game.sections[i].answers[n].jmp == -1)){
+					io.in(id).emit("msg", {id: 0, text: "GameFile - Section: Invalid jmp adress at ID " + game.sections[i].id});
 					return null;
+				}
+				else if(game.sections[i].answers[n].jmp != -1){
+					if(temp == -1){
+						temp = game.sections[i].answers[n].jmp;
+					}
+					else{
+						io.in(id).emit("msg", {id: 0, text: "GameFile - Section: More than one answers at ID " + game.sections[i].id});
+						return null;
+					}
 				}
 			}
 		}
