@@ -24,7 +24,7 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <li><code>oneforall</code>: All player play together</li></p>
 
 <h2>Game file</h2>
-<p>Note: The whole gamefile has to be a <code>.txt</code> file in <code>JSON</code>.</p>
+<p>Note: The whole gamefile has to be a <code>JSON</code> file.</p>
 <h3>Settings</h3>
 <p>The settings object have to be on top of the file with an id of <code>settings</code>.</p>
 <h4>Type-Mode:</h4>
