@@ -10,7 +10,7 @@ If the file is valid to be played, it can be started. There are multiple game mo
 <p>Make sure that <code>Node.js</code> is installed.<br>
 Write <code>node server.js</code> in windows console to run the server. You get a message in console, if its running.
 Return Error on failure. 
-Your ip adress will be used to connect to the server. The stanard port for connection is <code>5000</code>. To get access, you have to
+Your ip adress will be used to connect to the server. The standard port for connection is <code>5000</code>. To get access, you have to
 type <code>localhost:5000</code>, if its running on the same device or <code>your ipv4:5000</code>, if you reach it from somewhere.</p>
   
 <h2>Game types</h2>
