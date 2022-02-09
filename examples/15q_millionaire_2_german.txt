@@ -1,0 +1,173 @@
+[
+	{
+		"id": "settings",
+		"gameName": "Wer wird Millionär 2 15 Fragen",
+		"type": "points",
+		"mode": "single"
+	},
+	{
+		"id": 1,
+		"q": "Was dient nicht zur Verhütung?",
+		"a":
+			[	
+				{"t": "Pille",				"jmp": -1},
+				{"t": "Kondom",				"jmp": -1},
+				{"t": "Coitus interruptus",	"jmp": -1},
+				{"t": "Glücksspirale",		"jmp": 2}
+			]
+	},
+	{
+		"id": 2,
+		"q": "Was macht der Platzwart von Berufs wegen?",
+		"a":
+			[
+				{"t": "an der Tube schnüffeln",	"jmp": -1},
+				{"t": "ein paar Linien ziehen",	"jmp": 3},
+				{"t": "sich einen zwitchern",	"jmp": -1},
+				{"t": "'ne Tüte drehen",		"jmp": -1}
+			]
+	},
+	{
+		"id": 3,
+		"q": "Große Heulerei gibt's manchmal auf der Kirmes, wenn Kinder ...?",
+		"a":
+			[
+				{"t": "desorientiert sind",		"jmp": -1},
+				{"t": "aus der Spur kommen",	"jmp": -1},
+				{"t": "die Balons verlieren",	"jmp": 4},
+				{"t": "ins Schwanken geraten",	"jmp": -1}
+			]
+	},
+	{
+		"id": 4,
+		"q": "Wer kann vielleicht schwimmen, aber nicht fliegen?",
+		"a":
+			[
+				{"t": "Stockenten",	"jmp": -1},
+				{"t": "Pfeifenten",	"jmp": -1},
+				{"t": "Krickenten",	"jmp": 5},
+				{"t": "Studenten",	"jmp": -1}
+			]
+	},
+	{
+		"id": 5,
+		"q": "Welcher natürliche Reichtum ist selbst bei ansonsten mittellosen Männern in aller Regel unverkäuflich?",
+		"a":
+			[
+				{"t": "Tafelsilber",	"jmp": -1},
+				{"t": "Goldreserve",	"jmp": -1},
+				{"t": "Kronjuwelen",	"jmp": 6},
+				{"t": "Faberge-Eier",	"jmp": -1}
+			]
+	},
+	{
+		"id": 6,
+		"q": "Wie bezeichnet man Wandmalerei auf feuchtem Kalkputz?",
+		"a":
+			[
+				{"t": "Fiasko",	"jmp": -1},
+				{"t": "Fresko",	"jmp": 7},
+				{"t": "Fiesta",	"jmp": -1},
+				{"t": "Frisco",	"jmp": -1}
+			]
+	},
+	{
+		"id": 7,
+		"q": "Wer weiß wohl am ehesten, was mit 'Jumpsuit' gemeint ist?",
+		"a":
+			[
+				{"t": "Modekenner",	"jmp": 8},
+				{"t": "Börsen-Spekulanten",	"jmp": -1},
+				{"t": "Stabhochspringer",	"jmp": -1},
+				{"t": "Autoverkäufer",	"jmp": -1}
+			]
+	},
+	{
+		"id": 8,
+		"q": "Von welchem nur 321 Meter hohen Berg wird behauptet, der meistbestiegene Europas zu sein?",
+		"a":
+			[
+				{"t": "Brocken",	"jmp": -1},
+				{"t": "Drachenfels","jmp": 9},
+				{"t": "Feldberg",	"jmp": -1},
+				{"t": "Zugspitze",	"jmp": -1}
+			]
+	},
+	{
+		"id": 9,
+		"q": "Welche dieser legendären Brücken kann man nicht mit dem Auto passieren?",
+		"a":
+			[
+				{"t": "Rialtobrücke",		"jmp": 10},
+				{"t": "Pont Neuf",			"jmp": -1},
+				{"t": "Golden Gate Bridge",	"jmp": -1},
+				{"t": "Öresundbrücke",		"jmp": -1}
+			]
+	},
+	{
+		"id": 10,
+		"q": "Was bedeutet der Name der italienischen Nachspeise 'Tiramisu' wörtlich?",
+		"a":
+			[
+				{"t": "süß und köstlich",	"jmp": -1},
+				{"t": "zieh mich hoch",		"jmp": 11},
+				{"t": "das macht dick",		"jmp": -1},
+				{"t": "Leckermäulchen",		"jmp": -1}
+			]
+	},
+	{
+		"id": 11,
+		"q": "Wie viel Meter legt man zurück, während man im Auto bei 120 km/h für drei Sekunden auf sein Handy schaut?",
+		"a":
+			[
+				{"t": "ungefähr 15 Meter",	"jmp": -1},
+				{"t": "knapp 30 Meter",		"jmp": -1},
+				{"t": "etwa 50 Meter",		"jmp": -1},
+				{"t": "rund 100 Meter",		"jmp": 12}
+			]
+	},
+	{
+		"id": 12,
+		"q": "Welches dieser Bundesländer war noch nie mit einem Verein in der Ersten Fußball-Bundesliga der Herren vertreten?",
+		"a":
+			[
+				{"t": "Saarland",			"jmp": -1},
+				{"t": "Rheinland-Pfalz",	"jmp": -1},
+				{"t": "Schleswig-Holstein",	"jmp": 13},
+				{"t": "Hessen",				"jmp": -1}
+			]
+	},
+	{
+		"id": 13,
+		"q": "Wer ist laut Grundgesetz der Vertreter des Bundespräsidenten?",
+		"a":
+			[
+				{"t": "Vizebundespräsident",	"jmp": -1},
+				{"t": "Bundesratspräsident",	"jmp": 14},
+				{"t": "Bundestagspräsident"	,	"jmp": -1},
+				{"t": "Bundeskanzler",			"jmp": -1}
+			]
+	},
+	{
+		"id": 14,
+		"q": "Welcher Kinderbuchheld entpuppt sich als Nachfahre von einem der Heiligen Drei Könige?",
+		"a":
+			[
+				{"t": "Harry Potter",		"jmp": -1},
+				{"t": "Peter Pan",			"jmp": -1},
+				{"t": "Jim Knopf",			"jmp": 15},
+				{"t": "Pippi Langstrumpf",	"jmp": -1}
+			]
+	},
+	{
+		"id": 15,
+		"q": "Mit der Drake-Gleichung berechnet man die Wahrscheinlichkeit von ...?",
+		"a":
+			[
+				{"t": "Vierlingsgeburten",			"jmp": -1},
+				{"t": "Erdbeben",					"jmp": -1},
+				{"t": "Lottogewinnen",				"jmp": -1},
+				{"t": "außerirdischer Intelligenz",	"jmp": 0}
+			]
+	}
+]
