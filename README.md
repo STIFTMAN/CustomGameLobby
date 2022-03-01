@@ -50,7 +50,8 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 		"id": "settings",
 		"gameName": "2 Question Game",
 		"type": "deathmatch",
-		"mode": "single"
+		"mode": "single",
+		"shuffle": true
 	},
 	{
 		"id": 1,
