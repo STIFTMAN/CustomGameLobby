@@ -3,7 +3,8 @@
 		"id": "settings",
 		"gameName": "Wer wird Millionär 15 Fragen",
 		"type": "points",
-		"mode": "single"
+		"mode": "single",
+		"shuffle": true
 	},
 	{
 		"id": 1,

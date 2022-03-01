@@ -31,6 +31,7 @@ class Settings{
 		this.mode = "single"; // Single / Team über Farbe / One for all
 		this.gameName = "default";
 		this.type = "points"; // deathmatch -> Nur id oder -1/ Points nur id oder -1 / Path loops erlaubt
+		this.shuffle = false;
 	}
 }
 
@@ -654,6 +655,18 @@ function validGame(game, id){
 						return null;
 					}
 				}
+			}
+			if(game.settings.shuffle){
+				var usedAnswers = [];
+				var tempAnswers = [];
+				while(usedAnswers.length < game.sections[i].answers.length){
+					var index = Math.floor(Math.random() * game.sections[i].answers.length);
+					if(!usedAnswers.includes(index)){
+						usedAnswers.push(index);
+						tempAnswers.push(game.sections[i].answers[index]);
+					}
+				}
+				game.sections[i].answers = tempAnswers;
 			}
 		}
 	}
