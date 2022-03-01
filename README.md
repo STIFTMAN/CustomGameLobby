@@ -33,6 +33,8 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <li><code>path</code>: only <code>oneforall</code></li>
 <h4>Game Name</h4>
 <p><code>gameName</code>: Your Name for this game / story</p>
+<h4>Shuffle</h4>
+<p><code>shuffle</code>: Shuffle the answers</p>
 <h3>Section</h3>
 <p>Note: Starting ID have to be <code>1</code></p>
 <p>One section is made of:</p>
@@ -76,7 +78,7 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <h3>Errors</h3>
 <p>If the uploaded gamefile is invalid, the exact error will be shown in chat.</p>
 <h2>Playing</h2>
-<p>Multiple choise. When the game is finished, it tells you if you won or lost. The questions will NOT be shuffled, because it follows the <code>jmp</code> id. Max. 8 Players. There is no timelimit. If you play <code>deathmatch</code> and you are out, you can spectate the game.</p>
+<p>Multiple choise. When the game is finished, it tells you if you won or lost. Max. 8 Players. There is no timelimit. If you play <code>deathmatch</code> and you are out, you can spectate the game.</p>
 
 <h2>Notes</h2>
 <p>One Section have to be there to play. There have to be only correct answer, exept you play path. If you want to play alone, choose 'oneforall', else it needs 2 players to start.</p>
