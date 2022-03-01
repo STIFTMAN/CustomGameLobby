@@ -34,7 +34,7 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <h4>Game Name</h4>
 <p><code>gameName</code>: Your Name for this game / story</p>
 <h4>Shuffle</h4>
-<p><code>shuffle</code>: Shuffle the answers</p>
+<p><code>shuffle</code>: Shuffle the answers or not</p>
 <h3>Section</h3>
 <p>Note: Starting ID have to be <code>1</code></p>
 <p>One section is made of:</p>
