@@ -35,6 +35,9 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <p><code>gameName</code>: Your Name for this game / story</p>
 <h4>Shuffle</h4>
 <p><code>shuffle</code>: Shuffle the answers or not</p>
+<h4>Timer</h4>
+<p><code>timer</code>: Time (in seconds) to answer a question.</p>
+<p>Note: Minimum of <code>5</code> seconds have to be set to enable the time.</p>
 <h3>Section</h3>
 <p>Note: Starting ID have to be <code>1</code></p>
 <p>One section is made of:</p>
@@ -51,7 +54,8 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 		"gameName": "2 Question Game",
 		"type": "deathmatch",
 		"mode": "single",
-		"shuffle": true
+		"shuffle": true,
+		"timer": 90
 	},
 	{
 		"id": 1,
