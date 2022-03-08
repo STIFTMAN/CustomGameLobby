@@ -285,3 +285,18 @@ body{
 #a li:hover{
 	cursor:pointer;
 }
+
+#timer{
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 4em;
+    font-size: 4em;
+	height:4em;
+    text-align: center;
+	background-image: radial-gradient(rgb(0,255,0),rgb(0,255,0), transparent, transparent);
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	font-weight: bolder;
+}

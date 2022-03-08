@@ -4,6 +4,9 @@ var lobby = {status: "lobby"};
 var buttonSound = new Audio("sound2.mp3");
 var resetSound = new Audio("sound1.mp3");
 var winSound = new Audio("sound3.mp3");
+var timer = null;
+var timer_time = 0;
+var timer_max = 0;
 
 function clickButtonSound(){
 	buttonSound.play();
@@ -155,6 +158,40 @@ function handleDrop(e) {					// Drag&Drop
 	}
 }
 
+function stopTimer(){
+	clearInterval(timer);
+	if(timer_time <= 0.0){
+		socket.emit("giveAnswer",-1);
+	}
+	if(document.getElementById("timer")){
+		document.getElementById("timer").remove();
+	}
+}
+
+function handleTimer(){
+	timer_time = Math.round((timer_time - 0.1)*100) / 100;
+	if(timer_time >= 0.0){
+		document.getElementById("timer").innerHTML = timer_time;
+		var color = Math.abs(Math.round((timer_time/timer_max)*255));
+		document.getElementById("timer").style.backgroundImage = "radial-gradient(rgb(" + (255-color) + "," + color + ",0),rgb(" + (255-color) + "," + color + ",0), transparent, transparent)";
+	}
+	if(timer_time <= 0.0){
+		stopTimer();
+	}
+}
+
+function startTimer(data){
+	if(!document.getElementById("timer")){
+		var node = document.createElement("DIV");
+		node.id = "timer";
+		node.innerHTML = data;
+		document.body.appendChild(node);
+	}
+	timer_time = data;
+	timer_max = data;
+	timer = setInterval(handleTimer, 100);
+}
+
 socket.on("startGame", function(data){
 	if(document.getElementById("waiting")){
 		document.getElementById("waiting").remove();
@@ -183,7 +220,6 @@ socket.on("startGame", function(data){
 });
 
 socket.on("win", function(data){
-	console.log(data);
 	var j = false;
 	for(var i = 0; i < data.length; i++){
 		if(socket.id == data[i]){
@@ -235,8 +271,12 @@ socket.on("nextQuestion",function(data){
 		node2.onclick = function(){
 			clickButtonSound();
 			socket.emit("giveAnswer",this.id);
+			stopTimer();
 		}
 		document.getElementById("a").appendChild(node2);
+	}
+	if(lobby.settings.timer >= 5){
+		startTimer(lobby.settings.timer);
 	}
 });
 

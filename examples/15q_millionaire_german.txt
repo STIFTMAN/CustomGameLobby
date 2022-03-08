@@ -4,7 +4,8 @@
 		"gameName": "Wer wird Millionär 15 Fragen",
 		"type": "points",
 		"mode": "single",
-		"shuffle": true
+		"shuffle": true,
+		"timer": 90
 	},
 	{
 		"id": 1,

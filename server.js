@@ -32,6 +32,7 @@ class Settings{
 		this.gameName = "default";
 		this.type = "points"; // deathmatch -> Nur id oder -1/ Points nur id oder -1 / Path loops erlaubt
 		this.shuffle = false;
+		this.timer = 0; // timer < 5 -> no timer 
 	}
 }
 
