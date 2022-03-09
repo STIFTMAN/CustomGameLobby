@@ -169,11 +169,12 @@ function stopTimer(){
 }
 
 function handleTimer(){
-	timer_time = Math.round((timer_time - 0.1)*100) / 100;
+	//timer_time = Math.round((timer_time - 0.1)*100) / 100;
+	timer_time--;
 	if(timer_time >= 0.0){
 		document.getElementById("timer").innerHTML = timer_time;
 		var color = Math.abs(Math.round((timer_time/timer_max)*255));
-		document.getElementById("timer").style.backgroundImage = "radial-gradient(rgb(" + (255-color) + "," + color + ",0),rgb(" + (255-color) + "," + color + ",0), transparent, transparent)";
+		document.getElementById("timer").style.backgroundColor = "rgb(" + (255-color) + "," + color + ",0)";
 	}
 	if(timer_time <= 0.0){
 		stopTimer();
@@ -189,7 +190,19 @@ function startTimer(data){
 	}
 	timer_time = data;
 	timer_max = data;
-	timer = setInterval(handleTimer, 100);
+	timer = setInterval(handleTimer, 1000);
+}
+
+function copyId(){
+	var TempText = document.createElement("input");
+	TempText.value = document.getElementById("lobbyid").innerHTML;
+	document.body.appendChild(TempText);
+	TempText.select();
+
+	document.execCommand("copy");
+	document.body.removeChild(TempText);
+
+	alert("Copied to Clipboard: " + TempText.value);
 }
 
 socket.on("startGame", function(data){
@@ -407,7 +420,7 @@ socket.on("lobbyId", function(data){
 		var string = "<h1>Waiting for Players ...</h1>";
 		string += "<h2>The leader has to start the game.</h2>";
 		string += "<h2 id='waitingButtons'><button onclick='socket.emit(" + '"nextColor", 0' + ");'>Change Color</button> ";
-		string += "Lobby-Id: <em style='color:red;'>" + data + " </em></h2>";
+		string += "Lobby-Id: <div id='lobbyidcontainer'><em id='lobbyid'>" + data + "</em><button onclick='copyId()'>Copy</button></div></h2>";
 		string += "<h1>Players in Lobby</h1>";
 		string += "<ul id='waitingPlayers'></ul>";
 		div.innerHTML = string;
