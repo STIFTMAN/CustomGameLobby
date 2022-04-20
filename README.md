@@ -1,4 +1,4 @@
-<h1> Custom Game Lobby</h1>
+<h1>Custom Game Lobby</h1>
 <p>This tool provides a multiplayer game lobby and game hosting with your input in your webbrowser. The lobby leader, who created a lobby uploads a game file.
 If the file is valid to be played, it can be started. There are multiple game modes and types to play. You can only play multiple choice games, like "Who wants to be a millionaire?"</p>
 
@@ -85,6 +85,10 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <h2>Playing</h2>
 <p>Multiple choise. When the game is finished, it tells you if you won or lost. Max. 8 Players. There is no timelimit. If you play <code>deathmatch</code> and you are out, you can spectate the game.</p>
 
+<h2>New:</h2>
+<p><em>Private</em> and <em>Public</em> lobbys.</p>
+<p>You can only join a <em>Private</em> lobby by its ID</p>
+<p>If <em>Public</em> is set, everyone can join you game, because it is shown in a public list.</p>
 <h2>Notes</h2>
 <p>One Section have to be there to play. There have to be only correct answer, exept you play path. If you want to play alone, choose 'oneforall', else it needs 2 players to start.</p>
   <p>IMPORTANT: <code>-1</code> at jmp means <code>lose</code> and <code>0</code> means <code>win</code>. <code>-1</code> will be ignored, if <code>points</code> is set.</p>
