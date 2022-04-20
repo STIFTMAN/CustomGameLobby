@@ -85,7 +85,7 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <h2>Playing</h2>
 <p>Multiple choise. When the game is finished, it tells you if you won or lost. Max. 8 Players. There is no timelimit. If you play <code>deathmatch</code> and you are out, you can spectate the game.</p>
 
-<h2>New:</h2>
+<h2>New</h2>
 <p><em>Private</em> and <em>Public</em> lobbys.</p>
 <p>You can only join a <em>Private</em> lobby by its ID</p>
 <p>If <em>Public</em> is set, everyone can join you game, because it is shown in a public list.</p>
