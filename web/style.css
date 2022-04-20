@@ -1,6 +1,13 @@
 html{
 	font-size: clamp(0.5rem,1vw,1rem);
 	transition: all 300ms ease-in-out;
+	-webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 ::-webkit-scrollbar {
@@ -45,13 +52,6 @@ body{
 	border-color: orange;
 }
 
-#join .buttonleft{
-	float: left;
-}
-
-#join .buttonright{
-	float: right;
-}
 #join button{
 	border:none;
 	outline:none;
@@ -65,6 +65,57 @@ body{
 #join button:hover{
 	background-color:#bbb;
 	color:white;
+}
+
+#join ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#join ul li{
+	font-size: 2em;
+	background-color: #eee;
+	border-radius: 1em;
+	margin: 1em;
+}
+
+#join ul li:nth-child(n+3){
+	padding: 2em;
+	cursor: pointer;
+}
+
+.activeLobby{
+	background-color: #ccc;
+	border-radius: 0.5em;
+	padding: 0.5em;
+	margin: 0.5em 0;
+	cursor: pointer;
+}
+
+.activeLobby:hover{
+	background-color: #aaa;
+}
+
+summary{
+	padding: 2em;
+	cursor: pointer;
+}
+
+details p:nth-child(n+1){
+	padding: 0 2em 2em 2em;
+	margin: 0;
+}
+details summary::-webkit-details-marker {
+	display:none;
+}
+
+details > summary {
+  list-style: none;
+}
+
+#join ul li:hover{
+	background-color: #888;
 }
 
 #waiting{
@@ -84,12 +135,13 @@ body{
 	outline:none;
 	font-size:0.75em;
 	padding: 0.5em 1em;
-	border-radius: 3px;
 	cursor: pointer;
 	background-color:#ddd;
 	font-family: 'Montserrat';
 	margin-right: 0.5em;
+	border-radius: 3px;
 }
+
 #waitingButtons button:hover{
 	background-color:#bbb;
 	color:white;
@@ -107,32 +159,6 @@ body{
 	border-radius: 3px;
     margin: auto;
     width: fit-content;
-}
-
-#settingsButtons{
-	font-size:1.5em;
-	bottom:0;
-	border-radius: 3px;
-	width: fit-content;
-    margin: 2em auto;
-}
-#settingsButtons button{
-	border:none;
-	outline:none;
-	font-size:0.75em;
-	padding: 0.5em 1em;
-	cursor: pointer;
-	background-color:#ddd;
-	font-family: 'Montserrat';
-	border-radius:3px;
-}
-#settingsButtons button:hover{
-	background-color:#bbb;
-	color:white;
-}
-
-#settingsButtons .buttonleft{
-	margin-right: 3em;
 }
 
 #chat{
@@ -214,8 +240,30 @@ body{
 	cursor: pointer;
 	background-color:#ddd;
 	font-family: 'Montserrat';
-	border-radius:3px;
 }
+
+#settingsButtons button:nth-child(2){
+	border-left: solid 1px #888;
+	border-right: solid 1px #888;
+	color:white;
+}
+
+#settingsButtons button:nth-child(2).private{
+	background-color: green;
+}
+
+#settingsButtons button:nth-child(2).public{
+	background-color: red;
+}
+
+#settingsButtons button:last-child{
+	border-radius:0 0.5em 0.5em 0;
+}
+
+#settingsButtons button:first-child{
+	border-radius:0.5em 0 0 0.5em;
+}
+
 #settingsButtons button:hover{
 	background-color:#bbb;
 	color:white;

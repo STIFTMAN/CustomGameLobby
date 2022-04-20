@@ -28,11 +28,11 @@ class Player{
 
 class Settings{
 	constructor(){
-		this.mode = "single"; // Single / Team über Farbe / One for all
+		this.mode = "single"; 		// Single / Team über Farbe / One for all
 		this.gameName = "default";
-		this.type = "points"; // deathmatch -> Nur id oder -1/ Points nur id oder -1 / Path loops erlaubt
+		this.type = "points"; 		// deathmatch -> Nur id oder -1/ Points nur id oder -1 / Path loops erlaubt
 		this.shuffle = false;
-		this.timer = 0; // timer < 5 -> no timer 
+		this.timer = 0; 			// timer < 5 -> no timer
 	}
 }
 
@@ -167,6 +167,7 @@ class Lobby{
 		this.settings = null;
 		this.uploadedValidFile = false;
 		this.game = null;
+		this.type = "private";		// Public - private
 	}
 	getAnswer(socket, id){
 		if(this.status == "running"){
@@ -360,6 +361,20 @@ class Lobby{
 				}
 			}
 		}
+	}
+	toggleLobbyType(){
+		if(this.type == "private"){
+			this.type = "public";
+		}
+		else{
+			this.type = "private";
+		}
+	}
+	getLobbyInfo(){
+		if(this.status == "lobby" && this.type == "public"){
+			return {players: this.players.length, id: this.id};
+		}
+		return null;
 	}
 	resetAnswers(){
 		for(var i = 0; i < this.players.length; i++){
@@ -742,6 +757,17 @@ function getPlayerLobby(id){ // return -1 wenn nicht existitiert sonst return lo
 	return -1;
 }
 
+function getLobbyList(){
+	var temp = [];
+	for(var i = 0; i < lobbys.length; i++){
+		var temp2 = lobbys[i].getLobbyInfo();
+		if(temp2 != null){
+			temp.push(temp2);
+		}
+	}
+	return temp;
+}
+
 // Verbindungstypen
 io.sockets.on('connection', function(socket) {
 	socket.on('create', function(data) {
@@ -773,6 +799,18 @@ io.sockets.on('connection', function(socket) {
 				lobbys.splice(temp, 1);
 			}
 		}
+	});
+	socket.on("toggleLobbyType", function(){
+		var temp = getPlayerLobby(socket.id);
+		if(temp != -1){
+			lobbys[temp].toggleLobbyType();
+			socket.emit("lobbyTypeToggle", lobbys[temp].type);
+			lobbys[temp].sendAll("msg", {id: 0, text: "Changed to " + lobbys[temp].type + " lobby"});
+		}
+	});
+	socket.on("getLobbyInfo", function(){
+		var temp = getLobbyList();
+		socket.emit("returnLobbyList", temp);
 	});
 	socket.on('nextColor', function(data) {
 		var temp = getPlayerLobby(socket.id);

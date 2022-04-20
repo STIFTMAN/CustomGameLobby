@@ -338,8 +338,9 @@ socket.on("newLeader", function(data){
 		var node = document.createElement("h2");
 		var string = "";
 		node.id = "settingsButtons";
-		string += "<button class='buttonleft' onclick='socket.emit(" + '"getSettingsPre", 0' + ");'>Game Settings</button>";
-		string += "<button class='buttonright' onclick='socket.emit(" + '"startGame", 0 ' + ");'>Start Game</button>";
+		string += "<button onclick='socket.emit(" + '"getSettingsPre", 0' + ");'>Game Upload / Settings</button>";
+		string += "<button id='lobbyTypeToggle' class='private' onclick='socket.emit(" + '"toggleLobbyType", 0 ' + ");'>private</button>";
+		string += "<button onclick='socket.emit(" + '"startGame", 0 ' + ");'>Start Game</button>";
 		node.innerHTML = string;
 		document.getElementById("waiting").appendChild(node);
 	}
@@ -357,6 +358,11 @@ socket.on("newLeader", function(data){
 			document.getElementById(players[temp].id).innerHTML = string;
 		}
 	}
+});
+
+socket.on("lobbyTypeToggle", function(data){
+	document.getElementById("lobbyTypeToggle").innerHTML = data;
+	document.getElementById("lobbyTypeToggle").className = data;
 });
 
 socket.on("getPlayerData",function(data){
