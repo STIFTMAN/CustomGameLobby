@@ -28,7 +28,7 @@ type <code>localhost:5000</code>, if its running on the same device or <code>you
 <h3>Settings</h3>
 <p>The settings object have to be on top of the file with an id of <code>settings</code>.</p>
 <h4>Type-Mode:</h4>
-<li><code>deathmatch</code>: all modes available</li>
+<li><code>deathmatch</code>: <code>single</code>,<code>teams</code> and <code>oneforall</code></li>
 <li><code>points</code>: <code>single</code> or <code>teams</code></li>
 <li><code>path</code>: only <code>oneforall</code></li>
 <h4>Game Name</h4>
